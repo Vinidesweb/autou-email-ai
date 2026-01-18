@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Classificador de Email</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Classificador de Emails</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <textarea name="email_text" placeholder="Cole o email aqui (opcional)..."></textarea>
+
+            <p style="margin: 10px 0; font-weight: bold;">OU</p>
+
+            <input type="file" name="email_file" accept=".txt">
+
+            <br>
+            <button type="submit">Analisar</button>
+        </form>
+
+
+        {% if result %}
+            <div class="resultado">
+                <span class="badge {{ 'produtivo' if result.classe == 'Produtivo' else 'improdutivo' }}">
+                    {{ result.classe }}
+                </span>
+
+                <p><strong>Resposta sugerida:</strong></p>
+                <p>{{ result.resposta }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
